@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ebe75f838c60c4b82f6e73af2e1de6, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  treenRef: {fileID: 2040292145372120091, guid: 0154d0cd0e5837c4da96d956f5341a34,
+    type: 3}
+  obstacleRef: {fileID: 3592999772127819872, guid: b999d192d4b9f464681aa40f2e3382f3,
+    type: 3}
+  Jump: {fileID: 8300000, guid: 42a6c12403d718f49aa64ef76b954012, type: 3}
+  Power: {fileID: 8300000, guid: a5bf7040001033b4f85937b9238fb2c0, type: 3}
+  Inpact: {fileID: 8300000, guid: 1461becdcf7be8c47a458deddbd2cf28, type: 3}
