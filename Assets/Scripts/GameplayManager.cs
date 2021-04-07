@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class GameplayManager : Singleton<GameplayManager>
 {
+    //private
     private BirdController mainHero;
     private List<GameObject> spawnedTerrain = new List<GameObject>();
     private List<GameObject> spawnedObstacle = new List<GameObject>();
     private EGameState m_state;
     private int m_points = 0 ;
-
+    private bool firstReloadScene = true;
+    
+    //public
     public float terrainWidth;
     public float emptySpace;
     public GameSettingsDatabase GameDatabase;
@@ -42,6 +45,7 @@ public class GameplayManager : Singleton<GameplayManager>
     }
     void Start()
     {
+     
         Points = 0;
         mainHero = FindObjectOfType<BirdController>();
         spawnedTerrain.Add(Instantiate(GameDatabase.treenRef, new Vector3(mainHero.transform.position.x , 0, 0), Quaternion.identity));
@@ -82,8 +86,12 @@ public class GameplayManager : Singleton<GameplayManager>
         get { return m_points; }
         set
         {
-            m_points = value;
-            m_HUD.UpdatePoints(m_points);
+            if(m_points !=value)
+            {
+                m_points = value;
+                m_HUD.UpdatePoints(m_points);
+
+            }
         }
     }
 
