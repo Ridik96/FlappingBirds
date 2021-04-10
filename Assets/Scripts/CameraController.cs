@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private BirdController followTarget;
+    
     private Vector3 originalPosition;
     private Vector3 position;
+
+    public BirdController followTarget;
 
     private void LateUpdate()
     {
@@ -14,11 +16,9 @@ public class CameraController : MonoBehaviour
     }
     void Start()
     {
-        followTarget = FindObjectOfType<BirdController>();
         originalPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         position = new Vector3(followTarget.transform.position.x, originalPosition.y, originalPosition.z);

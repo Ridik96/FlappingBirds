@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -8,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("Buttons")]
     public Button resumeButton;
+    public Button restartButton;
     public Button beckToMenu;
 
    [Header("Panel")]
@@ -16,6 +18,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         resumeButton.onClick.AddListener(delegate { OnResume(); });
+        restartButton.onClick.AddListener(delegate { OnRestart(); });
         beckToMenu.onClick.AddListener(delegate { OnQuit(); });
         pausePanel.SetActive(false);
         GameplayManager.OnGamePaused += OnPause;
@@ -30,6 +33,11 @@ public class PauseMenu : MonoBehaviour
         GameplayManager.Instance.GameState = GameplayManager.EGameState.Playing;
         pausePanel.SetActive(false);
         
+    }
+
+    private void OnRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnQuit()

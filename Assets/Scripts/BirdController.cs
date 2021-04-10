@@ -3,18 +3,21 @@ using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
-    private AudioSource m_audioSource;
-
-    public Rigidbody2D m_rigidbodyBird;
+  
     public float force;
     public float velocity;
     public float rotationSpeed;
     public LayerMask mask;
 
+    [Header("Component")]
+    public AudioSource m_audioSource;
+    public Rigidbody2D m_rigidbodyBird;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (mask == (mask | (1 << collision.collider.gameObject.layer)))
         {
+            m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Inpact);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
@@ -25,10 +28,8 @@ public class BirdController : MonoBehaviour
         m_rigidbodyBird.velocity = new Vector2(velocity, m_rigidbodyBird.velocity.y);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        m_audioSource = GetComponent<AudioSource>();
         GameplayManager.OnGamePaused += doPause;
         GameplayManager.OnGamePlaying += doPlay;
     }

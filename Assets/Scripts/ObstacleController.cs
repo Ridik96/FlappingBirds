@@ -21,6 +21,7 @@ public class ObstacleController : MonoBehaviour
         gapMidpoint = Random.Range(5f, totalHeight - 5f);
         UpdateObstacleParams();
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bird"))
@@ -29,6 +30,7 @@ public class ObstacleController : MonoBehaviour
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Power);
         }
     }
+
     private void UpdateObstacleParams()
     {
         float M = Mathf.Clamp(gapMidpoint, 0, totalHeight);
