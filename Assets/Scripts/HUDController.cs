@@ -6,11 +6,22 @@ using UnityEngine.UI;
 public class HUDController : MonoBehaviour
 {
     public Button pauseMenuButton;
-    public TMPro.TextMeshProUGUI PointsText;
+    public TMPro.TextMeshProUGUI pointsText;
+    [HideInInspector] public bool buttons;
+
+    public bool SetPause
+    {
+        set
+        {
+            buttons = value;
+            pauseMenuButton.interactable = buttons;
+            pointsText.enabled = buttons;
+        }
+    }
     
     public void UpdatePoints(int points)
     {
-        PointsText.text = "Points: " + points;
+        pointsText.text = "Points: " + points;
     }
 
     public void Start()

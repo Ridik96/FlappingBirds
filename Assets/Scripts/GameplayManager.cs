@@ -39,11 +39,13 @@ public class GameplayManager : Singleton<GameplayManager>
                 case EGameState.Paused:
                     {
                         OnGamePaused?.Invoke();
+                        m_HUD.SetPause = false;
                     }
                     break;
                 case EGameState.Playing:
                     {
                         OnGamePlaying?.Invoke();
+                        m_HUD.SetPause = true;
                     }
                     break;
             }
@@ -81,9 +83,9 @@ public class GameplayManager : Singleton<GameplayManager>
         }
       
         //SpawnedObstacle
-        if (mainHero.transform.position.x > Obstacle.transform.position.x)
+        if (mainHero.transform.position.x > (Obstacle.transform.position.x * 0.5))
         {
-            ObstacleObjectPool.SetObject(new Vector3(Obstacle.transform.position.x + emptySpace, 0, 0), Quaternion.identity);
+            ObstacleObjectPool.SetObject(new Vector3((Obstacle.transform.position.x  + emptySpace), 0, 0), Quaternion.identity);
         }
 
         if (Input.GetKey(KeyCode.Escape))
