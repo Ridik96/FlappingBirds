@@ -82,11 +82,12 @@ public class GameplayManager : Singleton<GameplayManager>
             TerreinObjectPool.SetObject(new Vector3(mainHero.transform.position.x + (terrainWidth - 0.2f), 0, 0), Quaternion.identity);
         }
       
-        //SpawnedObstacle
-        if (mainHero.transform.position.x > (Obstacle.transform.position.x * 0.5))
+       /* //SpawnedObstacle
+        if (mainHero.transform.position.x > (Obstacle.transform.position.x ))
         {
             ObstacleObjectPool.SetObject(new Vector3((Obstacle.transform.position.x  + emptySpace), 0, 0), Quaternion.identity);
-        }
+        }*/
+
 
         if (Input.GetKey(KeyCode.Escape))
             GameState = EGameState.Paused;
