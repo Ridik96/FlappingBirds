@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
-  
+    public float gravityForce;
     public float force;
     public float velocity;
     public float rotationSpeed;
@@ -38,18 +38,21 @@ public class BirdController : MonoBehaviour
     void Update()
     {
        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            m_rigidbodyBird.AddForce(Vector2.up * force);
+        { 
+            m_rigidbodyBird.AddForce(Vector2.up * force,ForceMode2D.Impulse);
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Jump);
         }
 
-          if(m_rigidbodyBird.velocity.y < 0 )
-         {
+        Physics2D.gravity = new Vector3(0, -gravityForce, 0);
+        
+       if(m_rigidbodyBird.velocity.y < 0 )
+        {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, transform.rotation = Quaternion.Euler(0, 0, -30.0f), Time.deltaTime * rotationSpeed);
-         }
-         else
-         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, transform.rotation = Quaternion.Euler(0, 0, 30.0f), Time.deltaTime * rotationSpeed );
+        }
+
+       else
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, transform.rotation = Quaternion.Euler(0, 0, 30.0f), Time.deltaTime * rotationSpeed);
         }
     }
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    private float gapHeight;
-    private float gapMidpoint;
+   public float gapHeight;
+    public float gapMidpoint;
     private float totalHeight;
     private SpriteRenderer upColumn;
     private SpriteRenderer downColumn;
@@ -17,7 +17,7 @@ public class ObstacleController : MonoBehaviour
         totalHeight = GetComponent<BoxCollider2D>().size.y;
         upColumn = transform.Find("UpColumn").gameObject.GetComponent<SpriteRenderer>();
         downColumn = transform.Find("DownColumn").gameObject.GetComponent<SpriteRenderer>();
-        gapHeight = Random.Range(5f, 9f);
+        gapHeight = 5f;
         gapMidpoint = Random.Range(5f, totalHeight - 5f);
         UpdateObstacleParams();
     }

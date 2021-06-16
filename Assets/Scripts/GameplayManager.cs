@@ -22,7 +22,7 @@ public class GameplayManager : Singleton<GameplayManager>
     public float emptySpace;
     [HideInInspector] public GameObject terrein;
     [HideInInspector] public GameObject Obstacle;
-    //[HideInInspector] public bool spawnedObstacle;
+  
 
     //Delegate and Event
     public delegate void GameStateCallback();
@@ -82,14 +82,6 @@ public class GameplayManager : Singleton<GameplayManager>
         {
             TerreinObjectPool.SetObject(new Vector3(mainHero.transform.position.x + (terrainWidth - 0.2f), 0, 0), Quaternion.identity);
         }
-      
-       /* //SpawnedObstacle
-        if (mainHero.transform.position.x > (Obstacle.transform.position.x ))
-       if(spawnedObstacle)
-        {
-            ObstacleObjectPool.SetObject(new Vector3((Obstacle.transform.position.x  + emptySpace ), 0, 0), Quaternion.identity);
-        }*/
-
 
         if (Input.GetKey(KeyCode.Escape))
             GameState = EGameState.Paused;
