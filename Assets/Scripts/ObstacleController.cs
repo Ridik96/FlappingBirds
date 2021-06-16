@@ -11,8 +11,6 @@ public class ObstacleController : MonoBehaviour
     private SpriteRenderer downColumn;
     private AudioSource m_audioSource;
 
-    [HideInInspector] public bool spawnedObstacle = false;
-
     void Start()
     {
         m_audioSource = GetComponent<AudioSource>();
@@ -29,11 +27,18 @@ public class ObstacleController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bird"))
         {
             GameplayManager.Instance.Points += 1;
-           
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Power);
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bird"))
+        {
+            GameplayManager.Instance.ObstacleObjectPool.SetObject(new Vector3((GameplayManager.Instance.Obstacle.transform.position.x + GameplayManager.Instance.emptySpace), 0, 0), Quaternion.identity);
+        }
+    }
+    
     private void UpdateObstacleParams()
     {
         float M = Mathf.Clamp(gapMidpoint, 0, totalHeight);
@@ -46,4 +51,5 @@ public class ObstacleController : MonoBehaviour
         upColumn.size = new Vector2(upColumn.size.x, U);
         downColumn.size = new Vector2(downColumn.size.x, D);
     }
+
 }
