@@ -1,5 +1,4 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
@@ -12,13 +11,21 @@ public class BirdController : MonoBehaviour
     [Header("Component")]
     public AudioSource m_audioSource;
     public Rigidbody2D m_rigidbodyBird;
+    public Animator m_animator;
+    public SpriteRenderer m_spriterenderer;
+
+    [HideInInspector] public bool death = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (mask == (mask | (1 << collision.collider.gameObject.layer)))
         {
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Inpact);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            death = true;
+            m_animator.enabled = false;
+            GameplayManager.Instance.m_HUD.SetEnd = death;
+            Time.timeScale = 0;
+           
         }
     }
 
@@ -32,18 +39,20 @@ public class BirdController : MonoBehaviour
     {
         GameplayManager.OnGamePaused += doPause;
         GameplayManager.OnGamePlaying += doPlay;
+        Time.timeScale = 1
+;
     }
     
     
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Space))
+       if (Input.GetKeyDown(KeyCode.Space)&&(!GameplayManager.Instance.isBeginning))
         { 
             m_rigidbodyBird.AddForce(Vector2.up * force,ForceMode2D.Impulse);
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Jump);
         }
 
-        Physics2D.gravity = new Vector3(0, -gravityForce, 0);
+        //Physics2D.gravity = new Vector3(0, -gravityForce, 0);
         
        if(m_rigidbodyBird.velocity.y < 0 )
         {
@@ -59,11 +68,13 @@ public class BirdController : MonoBehaviour
     private void doPlay()
     {
         m_rigidbodyBird.simulated = true;
+        m_animator.enabled = true;
     }
 
     private void doPause()
     {
         m_rigidbodyBird.simulated = false;
+        m_animator.enabled = false;
     }
 
     private void OnDestroy()

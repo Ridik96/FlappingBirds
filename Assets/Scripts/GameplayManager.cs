@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +21,10 @@ public class GameplayManager : Singleton<GameplayManager>
     public int ObstaclePoolCount;
     public float terrainWidth;
     public float emptySpace;
+    [HideInInspector] public bool isBeginning = true;
     [HideInInspector] public GameObject terrein;
     [HideInInspector] public GameObject Obstacle;
-  
+    [HideInInspector] public GameObject startGamePanel;
 
     //Delegate and Event
     public delegate void GameStateCallback();
@@ -72,7 +74,8 @@ public class GameplayManager : Singleton<GameplayManager>
         ObstacleObjectPool.Init(GameDatabase.obstacleRef, ObstaclePoolCount);
         TerreinObjectPool.SetObject(new Vector3(mainHero.transform.position.x, 0, 0), Quaternion.identity);
         ObstacleObjectPool.SetObject(new Vector3(17, 0, 0), Quaternion.identity);
-        ObstacleObjectPool.SetObject(new Vector3(17+emptySpace, 0, 0), Quaternion.identity);
+        ObstacleObjectPool.SetObject(new Vector3(17 + emptySpace, 0, 0), Quaternion.identity);
+        StartCoroutine(Beginning());
     }
 
     void Update()
@@ -85,7 +88,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
         if (Input.GetKey(KeyCode.Escape))
             GameState = EGameState.Paused;
-       }
+    }
 
     public void PlayPause()
     {
@@ -103,7 +106,23 @@ public class GameplayManager : Singleton<GameplayManager>
                 break;
         }
     }
-    
+
+   [HideInInspector] public IEnumerator Beginning()
+    {
+        while (true)
+        {
+            Time.timeScale = 0;
+            if (Input.GetKeyDown(KeyCode.Space)) 
+            {
+                Time.timeScale = 1;
+                isBeginning = false;
+                startGamePanel.SetActive(false);
+                break;
+            }
+            yield return null;
+        }
+    }
+ 
     public enum EGameState
     {
         Playing,

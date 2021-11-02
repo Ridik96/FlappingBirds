@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    [HideInInspector]public string sceneName;
+
     [Header("Button")]
     public Button playButton;
     public Button optionsButton;
@@ -25,7 +28,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnPlay()
     {
-        GameplayManager.Instance.GameState = GameplayManager.EGameState.Playing;
+        SceneManager.LoadScene(sceneName);
         SetPanelVisible(false);
     }
 

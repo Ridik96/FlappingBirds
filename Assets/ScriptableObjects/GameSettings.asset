@@ -19,3 +19,6 @@ MonoBehaviour:
   Jump: {fileID: 8300000, guid: 42a6c12403d718f49aa64ef76b954012, type: 3}
   Power: {fileID: 8300000, guid: a5bf7040001033b4f85937b9238fb2c0, type: 3}
   Inpact: {fileID: 8300000, guid: 1461becdcf7be8c47a458deddbd2cf28, type: 3}
+  sceneName:
+  - Main menu
+  - Gameplay

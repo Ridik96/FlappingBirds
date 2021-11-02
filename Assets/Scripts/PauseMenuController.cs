@@ -16,8 +16,8 @@ public class PauseMenuController : MonoBehaviour
     void Start()
     {
         resumeButton.onClick.AddListener(delegate { OnResume(); });
-        restartButton.onClick.AddListener(delegate { OnRestart(); });
-        beckToMenu.onClick.AddListener(delegate { OnQuit(); });
+        restartButton.onClick.AddListener(delegate { OnRestart(GameplayManager.Instance.GameDatabase.sceneName[1]); });
+        beckToMenu.onClick.AddListener(delegate { OnQuit(GameplayManager.Instance.GameDatabase.sceneName[0]); });
         pausePanel.SetActive(false);
         GameplayManager.OnGamePaused += OnPause;
     }
@@ -31,16 +31,16 @@ public class PauseMenuController : MonoBehaviour
         GameplayManager.Instance.GameState = GameplayManager.EGameState.Playing;
         pausePanel.SetActive(false);
         
+    } 
+
+    public void OnRestart(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 
-    private void OnRestart()
+    public void OnQuit(string name)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    private void OnQuit()
-    {
-        Application.Quit();
+        SceneManager.LoadScene(name);
     }
 
     private void OnDestroy()

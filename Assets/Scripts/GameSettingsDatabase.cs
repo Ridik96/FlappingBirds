@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="GameSettings",menuName = "ScriptableObject/Create Game settings", order = 1)]
+[CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObject/Create Game settings", order = 1)]
 public class GameSettingsDatabase : ScriptableObject
 {
     [Header("Prefabs")]
@@ -13,4 +13,6 @@ public class GameSettingsDatabase : ScriptableObject
     public AudioClip Jump;
     public AudioClip Power;
     public AudioClip Inpact;
+
+    public string[] sceneName;
 }
