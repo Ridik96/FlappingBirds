@@ -49,7 +49,14 @@ public class BirdController : MonoBehaviour
        if (Input.GetKeyDown(KeyCode.Space)&&(!GameplayManager.Instance.isBeginning))
         { 
             m_rigidbodyBird.AddForce(Vector2.up * force,ForceMode2D.Impulse);
-            m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Jump);
+            if (death)
+            {
+                return;
+            }
+            else
+            {
+                m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.Jump);
+            }
         }
 
         //Physics2D.gravity = new Vector3(0, -gravityForce, 0);
